@@ -9,3 +9,13 @@ clear all; close all;
 % La mémoire M du codeur est donnée par le retard max des registres à
 % déclages, M = max deg(gi)
 
+% 2.2.
+m = [ 1 1 0 1 0 1 ];
+g = [ 7 5 ];
+
+% Affiche la séquence binaire codée correspondante
+c = codconv(m,g)
+
+%% 3. Décodage des codes convolutifs  algorithme de Viterbi
+
+paramconv2([1, 5, 7])
