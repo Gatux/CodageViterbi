@@ -4,14 +4,21 @@ function [ c ] = codconv( m, g )
     % codeur
     [G, M] = paramconv(g);
     
-    % La taille 
+    G
+    m
+    
+    % On calcule d'avance la taille de la matrice c qui va contenir la
+    % séquence de bits à transmettre sur le canal
+    % La formule nous permet de 
     len = max([length(G(1,:)) + length(m) - 1, length(G(1,:)), length(m)]);
     c = zeros(length(g), len);
+    
+    c
     
     for i=1:length(g)
       c(i,:) = mod(conv(m, G(i,:)), 2);
     end
     
-    len
+    c = reshape(c, 1, length(c)*length(c(:,1)))
 end
 

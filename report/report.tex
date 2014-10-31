@@ -3,6 +3,7 @@
 \usepackage[left=0.75in, right=0.75in, top=0.75in, bottom=0.75in]{geometry}
 \usepackage{layout}
 \usepackage{ucs}
+\usepackage[french]{babel}
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{titlesec}
@@ -61,11 +62,32 @@
 		
 	\subsection{Principe de fonctionnement de la fonction $codconv$}
 	
-		La fonction $codconv$ prend en paramètre le message à encoder \textbf{m}, ainsi qu'un vecteur $g$ composé des polynômes générateurs associés au code sous forme octale.\\
+		La fonction $codconv$ prend en paramètre le message à encoder \textbf{m}, ainsi qu'un vecteur $g$ composé des polynômes générateurs associés au code sous forme octale et elle renvoie la séquence de bits à transmettre \textbf{C}.\\
 		\\
+		On cherche à créer une matrice \textbf{C} dont les lignes seraient les coefficients des polynômes $C_i(D)$, avec $i \in  \llbracket 1, \ldots, n \rrbracket$. C'est à partir de cette matrice qu'on obtiendra la séquence à envoyer.\\
+		Par souci de performances, on calcule d'avance la taille de cette matrice :
+		\begin{itemize}
+			\item Le nombre de lignes est égal au nombre de polynômes générateurs
+			\item Le nombre de colonnes se trouve grâce à la formule permettant de calculer la taille du résultat de la convolution de deux vecteurs. En effet, comme les coefficients du produit de deux polynômes résultent de la convolution des coefficients de ces derniers, alors le produit de polynômes $\textbf{m}(D)g_i(D)$ revient à convoluer le vecteur $[m_0, \ldots, m_{L-1}]$ et le vecteur contenant les coefficients de $g_i$. Ainsi, le nombre $l$ de colonne est
+			\[
+				l = max\ (n+L-1,\ n,\ L)
+			\]
+			\\
+		\end{itemize}
+		\\
+		\\
+		Une fois que la matrice est initialisée, on la remplie de sorte que la nième ligne soit égale au produit de convolution modulo 2 du vecteur de bits \textbf{m} et du vecteur contenant les coefficients du polynômes $g_n$.\\
+		\\
+		Il ne reste plus qu'à modifier la taille de la matrice pour obtenir la séquence de bits à transmettre dans l'ordre défini et expliqué supra.
 		
-	
+		
 \section{Décodage des codes convolutifs : algorithme de Viterbi}
+
+	\subsection{Principe de fonctionnement de la fonction $paramconv2$}
+
+	\subsection{Principe de fonctionnement de la fonction $decodconv$}
+
+
 \section{Performances}
 	
 		
