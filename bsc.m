@@ -1,13 +1,15 @@
 function [ y ] = bsc( c,p )
 
-y=[];
+y=zeros(size(c,1),size(c,2));
 
-for i=1:length(c)
-    e=rand;
-    if e<p
-        y=[y abs(c(1,i)-1)];
-    else
-        y=[y c(1,i)];
+for i=1:size(c,1)
+    for j=1:size(c,2)
+        e=rand;
+        if e<p
+            y(i,j)=abs(c(i,j)-1);
+        else
+            y(i,j)=c(i,j);
+        end
     end
 end
        
