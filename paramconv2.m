@@ -5,7 +5,7 @@ function [ T ] = paramconv2( g )
         gtmp(i) = base2dec(int2str(g(i)),8); % from octal to binary
     end
     G = fliplr(dec2bin(gtmp)-'0');
-    M=length(G(1,:))-1;
+    M = length(G(1,:))-1;
     size = 2^M;
     T = -1 * ones(size);
     nb = length(g);
