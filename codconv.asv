@@ -12,6 +12,6 @@ function [ c ] = codconv( m, g )
       c(i,:) = mod(conv(m, G(i,:)), 2);
     end
     
-    c = reshape(c, 1, length(c)*length(c(:,1)))
+    len
 end
 

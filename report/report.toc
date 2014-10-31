@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}Encodage de codes convolutifs}{2}
+\contentsline {subsection}{\numberline {1.1}Principe d'encodage d'une s\'equence $\textbf {m} = [m_0, \ldots , m_{L-1}]$ de bits \`a transmettre}{2}
+\contentsline {subsection}{\numberline {1.2}M\'emoire M du codeur}{2}
+\contentsline {subsection}{\numberline {1.3}Principe de fonctionnement de la fonction $codconv$}{2}
+\contentsline {section}{\numberline {2}D\'ecodage des codes convolutifs : algorithme de Viterbi}{2}
+\contentsline {section}{\numberline {3}Performances}{2}

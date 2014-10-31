@@ -12,13 +12,6 @@ end
 
 y = reshape(y, length(g), length(y)/length(g))'
 
-% Le treillis sera un tableau contenant des entrées de la forme suivante :
-%   [t, id_1, id_2, p, m_t]
-%       t : instant
-%       id_1 : l'id du premier antécédant
-%       id_2 : l'id du second antécédant
-%       p : le poids
-
 treillis = cell(treillisLignes, treillisColonnes);
 treillis2 = zeros(treillisLignes, treillisColonnes);
 treillis{1,1} = {-1, -1, 0, -1};
@@ -69,10 +62,6 @@ for t=treillisColonnes:-1:2
 end
 
 m
-
-treillis
-treillis{3, 2}{3}
-treillis2
 
 end
 

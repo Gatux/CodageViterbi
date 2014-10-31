@@ -1,0 +1,75 @@
+\documentclass[11pt]{article}
+
+\usepackage[left=0.75in, right=0.75in, top=0.75in, bottom=0.75in]{geometry}
+\usepackage{layout}
+\usepackage{ucs}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{dsfont}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{array}
+\usepackage{stmaryrd}
+
+
+
+\title{\textbf{TS226 - TP de codage canal}\\\\Encodage et décodage de codes convolutifs}
+\author{Thomas MARCHAL - Maxime PETERLIN - Gabriel VERMEULEN\\\\{ENSEIRB-MATMECA, Bordeaux}}
+\date{12 juin 2014}
+
+
+\begin{document}
+
+\maketitle
+			
+\tableofcontents
+
+\newpage
+
+\section{Encodage de codes convolutifs}
+	
+	\subsection{Principe d'encodage d'une séquence $\textbf{m} = [m_0, \ldots, m_{L-1}]$ de bits à transmettre}
+	
+		Soit $n$ la longueur du code convolutif binaire.\\
+		Soient $g_1(D), \ldots, g_n(D)$ les $n$ polynômes générateurs à coefficients dans $\mathbb{F}_2$ servant à encoder la séquence $\textbf{m} = [m_0, \ldots, m_{L-1}]$.
+		On forme la matrice $G$ dont les lignes sont les coefficients de ces derniers. \\
+		\\
+		Soient $C(D)$ et $\textbf{m}(D)$ respectivement les séquences de bits encodée et à transmettre que l'on représente sous forme polynomiale.\\
+		\\
+		La relation permettant d'encoder le message $\textbf{m}$ est la suivante :
+		\begin{align}
+			C(D) &= \textbf{m}(D)G = [\textbf{m}(D)g_1(D), \ldots, \textbf{m}(D)g_n(D)]\\
+					 &= [C_1(D), \ldots, C_n(D)]
+		\end{align}
+		\\
+		La séquence envoyée est alors
+		\[
+			\underbrace{C_{1,0} \cdots C_{n,0}}_{t = 0}\ \ldots\ \underbrace{C_{1,t} \cdots C_{n,t}}_{instant\ t}
+		\]
+	
+	\subsection{Mémoire M du codeur}
+	
+		La mémoire M du codeur est donnée par le retard maximal des registres à décalage.\\
+		Mathématiquement, cela s'exprime de la manière suivante :
+		\[
+			M = \underset{i \in  \llbracket 1, \ldots, n \rrbracket}{max}\ deg(g_i)
+		\]
+		
+	\subsection{Principe de fonctionnement de la fonction $codconv$}
+	
+		La fonction $codconv$ prend en paramètre le message à encoder \textbf{m}, ainsi qu'un vecteur $g$ composé des polynômes générateurs associés au code sous forme octale.\\
+		\\
+		
+	
+\section{Décodage des codes convolutifs : algorithme de Viterbi}
+\section{Performances}
+	
+		
+
+			
+
+\end{document}
