@@ -41,16 +41,19 @@ for p=0:0.05:1
     p_err=[p_err sum(err)/500];
 end
 
+test_1=p_err-p_err_dec;
+
 figure
 plot([0:0.05:1],p_err_dec,'r')
 hold on
 plot([0:0.05:1],p_err)
-legend('Erreur au decodage','Erreur sans codage')
-title('g=[3]')
+xlabel('erreur canal')
+ylabel('erreur réception')
+legend('Avec codage','Sans codage')
+title('Courbe d`erreur d`une transmission pour g=[3]')
 hold off
 
 %% Perfomances : g=[5,7]
-clear all
 
 g=[5,7];
 m_ini=[0 0];
@@ -91,16 +94,19 @@ for p=0:0.05:1
     p_err=[p_err sum(err)/500];
 end
 
+test_2=p_err-p_err_dec;
+
 figure
 plot([0:0.05:1],p_err_dec,'r')
 hold on
 plot([0:0.05:1],p_err)
-legend('Erreur au decodage','Erreur sans codage')
-title('g=[5,7]')
+xlabel('erreur canal')
+ylabel('erreur réception')
+legend('Avec codage','Sans codage')
+title('Courbe d`erreur d`une transmission pour g=[5,7]')
 hold off
 
 %% Perfomances : g=[15,17]
-clear all
 
 g=[15,17];
 m_ini=[0 0];
@@ -141,10 +147,25 @@ for p=0:0.05:1
     p_err=[p_err sum(err)/500];
 end
 
+test_3=p_err-p_err_dec;
+
 figure
 plot([0:0.05:1],p_err_dec,'r')
 hold on
 plot([0:0.05:1],p_err)
-legend('Erreur au decodage','Erreur sans codage')
-title('g=[15,17]')
+xlabel('erreur canal')
+ylabel('erreur réception')
+legend('Avec codage','Sans codage')
+title('Courbe d`erreur d`une transmission pour g=[15,17]')
+
 hold off
+
+figure
+plot([0:0.05:1],test_1,'b')
+hold on
+plot([0:0.05:1],test_2,'r')
+plot([0:0.05:1],test_3,'g')
+xlabel('erreur canal')
+ylabel('performance')
+legend('g=[3]','g=[5,7]','g=[15,17]')
+title('Courbes de performance')
