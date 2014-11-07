@@ -91,7 +91,29 @@
 		Ainsi on obtient la matrice du diagramme d'état du code.
 		
 	\subsection{Principe de fonctionnement de la fonction $decodconv$}
-
+	
+	La fonction $decodconv$ prend en paramètre le message à décoder \textbf{y}, ainsi qu'un vecteur $g$ composé des polynômes générateurs associés au code sous forme octale et elle renvoie le message envoyé \textbf{m}.\\
+		\\
+		On commence par créer une matrice de $2^M$ lignes et $\frac{L_y}{L_g} + 1$ colonnes qui contiendra les informations relatives au treillis, avec $L_y$ la longueur du message encodé et $L_g$ le nombre de polynômes générateurs.\\
+		Si $L_y$ n'est pas divisible par $L_g$, cela veut dire que la taille du message encodé et le nombre de polynômes générateurs ne correspondent pas, un message d'erreur est alors renvoyé.\\
+		\\
+		Chaque composante de la matrice représentant le treillis va contenir une cell qui aura la structure suivante.
+		\begin{itemize}
+			\item Le numéro de la ligne au temps $t-1$ menant à la cell actuelle (i.e. au temps $t$).
+			\item Le poids associé à la cell actuelle.
+			\item Le bit associé au chemin.
+			\\
+		\end{itemize}
+		\\
+		Le treillis va ensuite être parcouru suivant ses colonnes et ses lignes pour remplir les différentes cell en fonction du diagramme d'état du code \textbf{T}.\\
+		\\
+		A chaque fois qu'on arrive sur une cell que l'on peut remplir (en se basant sur la matrice \textbf{T}), alors on commence par calculer le poids du chemin\\
+		Ensuite, si la cell du treillis que l'on veut créer n'existe pas, on la crée en remplissant les informations de la structure définie supra.
+		Par contre, si la cell existait déjà et qu'un autre chemin y mène, alors on compare les poids de ces derniers et on retient celui de poids le plus faible.\\
+		\\
+		Une fois que le treillis est rempli, on le parcourt en sens inverse en partant de la cell située dans la première ligne de la dernière colonne grâce aux numéros de lignes enregistrés permettant d'identifier les noeuds précédents.\\
+		\\
+		Il ne reste plus qu'a supprimer les $M$ derniers bits pour ne pas prendre en compte la remise à zéro des registres.
 
 \section{Performances}
 	

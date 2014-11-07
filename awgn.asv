@@ -1,0 +1,6 @@
+function [ y ] = awgn( c, s_2 )
+
+y = c + wgn(1, length(c), s_2);
+
+end
+
