@@ -111,6 +111,18 @@
 		Il ne reste plus qu'a supprimer les $M$ derniers bits pour ne pas prendre en compte la remise à zéro des registres.
 
 \section{Performances}
+
+	\subsection{Performances sur canal binaire symétrique}
+	
+		Le décodeur de Viterbi implémenté précédemment va nous permettre de tester les performances du \textit{hard decoding} n'acceptant que des entrées à valeurs dans l'alphabet $\{0,1\}$.\\
+		\\
+		On se place sur un canal binaire symétrique de probabilité d'erreur $p$. Pour cela, la fonction $bsc$ va parcourir un vecteur correspondant au message codé (ou au message initial dans le cas d'une transmission sans codage) et retourner le message transmit bit à bit avec une erreur de probabilité $p$.\\
+		\\
+		Le message \textit{tout à zéro} est transmis avec un codeur de génératrice $g = [3]$ (en parallèle du message non codé) dans le canal binaire symétrique précédent 500 fois pour nous permettre de moyenner le taux d'erreur à la réception et d'obtenir ainsi des probabilités d'erreurs fiables. La courbe d'erreur ainsi obtenu nous permet d'observer qu'une partie des erreurs survenues lors de la transmission à travers le canal a été corrigé. Le code est d'ailleurs plus performant pour une probabilité d'erreur canal $p = 0.5$ comme le montre la courbe de distance entre les deux messages reçus.\\
+		\\
+		Le même test est effectué pour un codeur de génératrice $g = [5,7]$ et un codeur de $g = [15,17]$.\\
+		On remarque ainsi que le premier est moins performant que le codeur $g = [3]$ dû à sa proximité avec la courbe d'erreur d'une transmission sans codage. Cependant le second nous permet d'obtenir un meilleur décodage dans les intervalles $[0; 0.2]$ et $[0.8; 1]$.
+		La connaissance de la probabilité d'erreur au décodage nous permettra donc de sélectionner le décodeur le plus performant (i.e. la génératrice à utiliser) comme dans l'exemple ci-dessus où le tout premier décodeur est plus performant pour $p \in [0.2; 0.8]$ et le troisième pour $p \in [0; 0.2] \bigcup\ [0.8; 1]$.
 	
 		
 
