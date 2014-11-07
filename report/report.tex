@@ -84,7 +84,12 @@
 \section{Décodage des codes convolutifs : algorithme de Viterbi}
 
 	\subsection{Principe de fonctionnement de la fonction $paramconv2$}
-
+		La fonction $paramconv2$ prend en paramètre un vecteur représentant les polynômes générateurs, en utilisant le système octal. Le but de cette fonction est de renvoyer une matrice T qui représente le diagramme d'état du code, où $\textbf{T}_{i,j}$ contient la sortie de l'encodeur associée à l'arête reliant l'état i à l'état j, sous forme décimale.\\
+		\\
+		On commence par tranformer les données octales des polynômes générateurs en binaire avec les fonctions $base2dec$ et $dec2bin$. On calcule M en prenant $M = \underset{i \in  \llbracket 1, \ldots, n \rrbracket}{max}\ deg(g_i)$, et on génère une matrice de taille $2^M$ initialisé à -1 pour différencier les arêtes utiles des non-existantes.\\
+		Ensuite on remplie la matrice aux endroits où les arètes existent, c'est-à-dire pour chaque couple de lignes $i$ et $i+1$ de la matrice, aux colonnes $i$ et $2^(M-1)$. Pour ce faire on effectue le calcul des équations de convolutions, obtenue à partir des polynômes générateurs et des états possibles des registres.\\
+		Ainsi on obtient la matrice du diagramme d'état du code.
+		
 	\subsection{Principe de fonctionnement de la fonction $decodconv$}
 
 

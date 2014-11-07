@@ -1,6 +1,6 @@
 function [ m ] = decodconv( y, g )
 
-T = paramconv2(g)
+T = paramconv2(g);
 
 treillisColonnes = length(y)/length(g) + 1;
 treillisLignes = length(T);
@@ -10,7 +10,7 @@ if treillisColonnes ~= fix(treillisColonnes)
     return;
 end
 
-y = reshape(y, length(g), length(y)/length(g))'
+y = reshape(y, length(g), length(y)/length(g))';
 
 treillis = cell(treillisLignes, treillisColonnes);
 treillis2 = zeros(treillisLignes, treillisColonnes);
@@ -60,8 +60,6 @@ for t=treillisColonnes:-1:2
     m(1, t-1) = treillis{suivant, t}{4};
     suivant = treillis{suivant, t}{1};
 end
-
-m
 
 end
 
