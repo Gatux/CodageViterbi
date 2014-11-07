@@ -17,12 +17,5 @@ g = [ 7 5 ];
 c = codconv(m,g);
 
 %% 3. Décodage des codes convolutifs  algorithme de Viterbi
-% Paramconv2
+
 paramconv2([1, 5, 7])
-
-%% decodconv
-
-y = [ 1 1 0 1 1 0 1 1 1 0 1 0 0 1 0 ];
-g = [ 1 5 7 ];
-
-decodconv(y, g)
