@@ -5,6 +5,8 @@
 \contentsline {subsection}{\numberline {1.3}Principe de fonctionnement de la fonction $codconv$}{2}
 \contentsline {section}{\numberline {2}D\'ecodage des codes convolutifs : algorithme de Viterbi}{3}
 \contentsline {subsection}{\numberline {2.1}Principe de fonctionnement de la fonction $paramconv2$}{3}
-\contentsline {subsection}{\numberline {2.2}Principe de fonctionnement de la fonction $decodconv$}{3}
-\contentsline {section}{\numberline {3}Performances}{4}
-\contentsline {subsection}{\numberline {3.1}Performances sur canal binaire sym\'etrique}{4}
+\contentsline {subsection}{\numberline {2.2}Exemple d'application de l'algorithme de Viterbi}{3}
+\contentsline {subsection}{\numberline {2.3}Principe de fonctionnement de la fonction $decodconv$}{3}
+\contentsline {section}{\numberline {3}Performances}{5}
+\contentsline {subsection}{\numberline {3.1}Performances sur canal binaire sym\'etrique}{5}
+\contentsline {subsection}{\numberline {3.2}Performances sur canal gaussien}{6}

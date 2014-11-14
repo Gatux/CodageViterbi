@@ -89,6 +89,25 @@
 		Ensuite on remplit la matrice aux endroits où les arètes existent, c'est-à-dire pour chaque couple de lignes $i$ et $i+1$ de la matrice, aux colonnes $i$ et $2^{M-1}$. Pour ce faire on effectue le calcul des équations de convolutions obtenues à partir des polynômes générateurs et des états possibles des registres.\\
 		Ainsi on obtient la matrice du diagramme d'états du code.
 		
+		
+	\subsection{Exemple d'application de l'algorithme de Viterbi}
+	
+		On se propose de décoder la séquence $\textbf{y} = [110110111010010]$ formée grâce au vecteur $\textbf{g} = [1, 5, 7]$ caractérisant les polynômes générateurs.\\
+		Comme nous avons 3 polynômes générateurs, la longueur du code est, de même, 3.\\
+		A partir de ces informations, on peut établir le treillis suivant.\\
+		\begin{figure}[h]
+				\centering
+				\includegraphics[scale=0.75]{img/treillis.png}
+				%\caption{Signal $r_l(t)$ pour $t \in [0, 50T_s-T_e]$}
+				\label{test_1}
+		\end{figure}
+		\\
+		On parcourt le treillis en partant de la fin en prennant jusqu'à revenir à l'état initial.\\
+		Dans cet exemple, on obtient la séquence de bits $00111$.\\
+		Il ne reste plus qu'à inverser l'ordre de la séquence et enlever les $M=2$ derniers bits pour obtenir le message envoyé, qui est ici $\textbf{m} = [111]$.
+		
+	
+	
 	\subsection{Principe de fonctionnement de la fonction $decodconv$}
 	
 	La fonction $decodconv$ prend en paramètre le message à décoder \textbf{y}, ainsi qu'un vecteur $g$ composé des polynômes générateurs associés au code sous forme octale et elle renvoie le message envoyé \textbf{m}.\\
@@ -114,6 +133,8 @@
 		\\
 		Il ne reste plus qu'a supprimer les $M$ derniers bits pour ne pas prendre en compte la remise à zéro des registres.
 
+\newpage
+
 \section{Performances}
 
 	\subsection{Performances sur canal binaire symétrique}
@@ -129,7 +150,7 @@
 				%\caption{Signal $r_l(t)$ pour $t \in [0, 50T_s-T_e]$}
 				\label{test_1}
 		\end{figure}
-		\\\\\\
+		\\\\
 		Le même test est effectué pour un codeur de génératrice $g = [5,7]$ et un codeur de $g = [15,17]$.\\
 		
 				\begin{figure}[h]
@@ -139,12 +160,36 @@
 					}%
 					%\caption{}
 					\end{figure}
-		\\\\
 		On remarque ainsi que le premier est moins performant que le codeur $g = [3]$ dû à sa proximité avec la courbe d'erreur d'une transmission sans codage. Cependant le second nous permet d'obtenir un meilleur décodage dans les intervalles $[0; 0.2]$ et $[0.8; 1]$.
 		La connaissance de la probabilité d'erreur au décodage nous permettra donc de sélectionner le décodeur le plus performant (i.e. la génératrice à utiliser) comme dans l'exemple ci-dessus où le tout premier décodeur est plus performant pour $p \in [0.2; 0.8]$ et le troisième pour $p \in [0; 0.2] \bigcup\ [0.8; 1]$.
 	
 		
+	\subsection{Performances sur canal gaussien}
+	
+	Le soft decoding diffère du hard decoding de par la manière dont est reçu et traité le signal.\\
+En effet le décodage souple va admettre des entrées à valeurs dans un ensemble plus large que l'alphabet du code. Ainsi après le passage du message dans un canal bruité nous allons calculer les poids non pas avec une distance
+de Hamming mais avec une distance Euclidienne.\\
+Comme précédemment, la fonction awgn nous permet de modéliser un canal gaussien par lequel va passer le message.
+La fonction decodconv est, quant à elle, modifiée pour nous permettre de calculer les poids par la distance Euclidienne et ainsi tracer, pour un message "tout à zéro", les probabilités d'erreurs par bit empiriques au décodage en fonction du SNR.\\
+\\
+Les génératrices sont les mêmes que pour la partie précédente et nous permettent d'observer les performances du soft decoding
+dans les 3 cas.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{img/test_soft_1.png}
+	%\caption{Signal $r_l(t)$ pour $t \in [0, 50T_s-T_e]$}
+	\label{test_1}
+\end{figure}
+		
+\begin{figure}[h]
+	\centerline{%
+		\includegraphics[width=0.5\textwidth]{img/test_soft_2.png}%
+		\includegraphics[width=0.5\textwidth] {img/test_soft_3.png}%
+	}%
+	%\caption{}
+\end{figure}
 
-			
+On remarque comme attendu la décroissance du taux d'erreur binaire en fonction du SNR ainsi que l'amélioration à la réception qu'apporte le décodage comparé à une transmission sans codage, bien que le premier codeur de génératrice $g = [3]$ n'apporte pas d'améliorations significatives.
+		
 
 \end{document}
