@@ -102,9 +102,9 @@
 				\label{test_1}
 		\end{figure}
 		\\
-		On parcourt le treillis en partant de la fin en prennant jusqu'à revenir à l'état initial.\\
+		On parcourt le treillis en partant de la fin jusqu'à revenir à l'état initial.\\
 		Dans cet exemple, on obtient la séquence de bits $00111$.\\
-		Il ne reste plus qu'à inverser l'ordre de la séquence et enlever les $M=2$ derniers bits pour obtenir le message envoyé, qui est ici $\textbf{m} = [111]$.
+		Il ne reste plus qu'à inverser l'ordre de la séquence et enlever les $M=2$ derniers bits correspondant à la remise à zéro des registres à décalage pour obtenir le message envoyé, qui est ici $\textbf{m} = [111]$.
 		
 	
 	
@@ -162,6 +162,14 @@
 					\end{figure}
 		On remarque ainsi que le premier est moins performant que le codeur $g = [3]$ dû à sa proximité avec la courbe d'erreur d'une transmission sans codage. Cependant le second nous permet d'obtenir un meilleur décodage dans les intervalles $[0; 0.2]$ et $[0.8; 1]$.
 		La connaissance de la probabilité d'erreur au décodage nous permettra donc de sélectionner le décodeur le plus performant (i.e. la génératrice à utiliser) comme dans l'exemple ci-dessus où le tout premier décodeur est plus performant pour $p \in [0.2; 0.8]$ et le troisième pour $p \in [0; 0.2] \bigcup\ [0.8; 1]$.
+		
+		
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{img/perfo.png}
+	%\caption{Signal $r_l(t)$ pour $t \in [0, 50T_s-T_e]$}
+	\label{perf}
+\end{figure}
 	
 		
 	\subsection{Performances sur canal gaussien}
@@ -174,11 +182,12 @@ La fonction decodconv est, quant à elle, modifiée pour nous permettre de calcule
 \\
 Les génératrices sont les mêmes que pour la partie précédente et nous permettent d'observer les performances du soft decoding
 dans les 3 cas.
+\newpage
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{img/test_soft_1.png}
 	%\caption{Signal $r_l(t)$ pour $t \in [0, 50T_s-T_e]$}
-	\label{test_1}
+	\label{test_soft_1}
 \end{figure}
 		
 \begin{figure}[h]
@@ -188,6 +197,7 @@ dans les 3 cas.
 	}%
 	%\caption{}
 \end{figure}
+\\\\\\
 
 On remarque comme attendu la décroissance du taux d'erreur binaire en fonction du SNR ainsi que l'amélioration à la réception qu'apporte le décodage comparé à une transmission sans codage, bien que le premier codeur de génératrice $g = [3]$ n'apporte pas d'améliorations significatives.
 		
