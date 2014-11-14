@@ -75,7 +75,6 @@
 			\\
 		\end{itemize}
 		\\
-		\\
 		Une fois que la matrice est initialisée, on la remplie de sorte que la nième ligne soit égale au produit de convolution modulo 2 du vecteur de bits \textbf{m} et du vecteur contenant les coefficients du polynômes $g_n$.\\
 		\\
 		Il ne reste plus qu'à modifier la taille de la matrice pour obtenir la séquence de bits à transmettre dans l'ordre défini et expliqué supra.
@@ -84,11 +83,11 @@
 \section{Décodage des codes convolutifs : algorithme de Viterbi}
 
 	\subsection{Principe de fonctionnement de la fonction $paramconv2$}
-		La fonction $paramconv2$ prend en paramètre un vecteur représentant les polynômes générateurs, en utilisant le système octal. Le but de cette fonction est de renvoyer une matrice T qui représente le diagramme d'état du code, où $\textbf{T}_{i,j}$ contient la sortie de l'encodeur associée à l'arête reliant l'état i à l'état j, sous forme décimale.\\
+		La fonction $paramconv2$ prend en paramètre un vecteur représentant les polynômes générateurs en utilisant le système octal. Le but de cette fonction est de renvoyer une matrice T qui représente le diagramme d'états du code, où $\textbf{T}_{i,j}$ contient la sortie de l'encodeur associée à l'arête reliant l'état $i$ à l'état $j$ sous forme décimale.\\
 		\\
-		On commence par tranformer les données octales des polynômes générateurs en binaire avec les fonctions $base2dec$ et $dec2bin$. On calcule M en prenant $M = \underset{i \in  \llbracket 1, \ldots, n \rrbracket}{max}\ deg(g_i)$, et on génère une matrice de taille $2^M$ initialisé à -1 pour différencier les arêtes utiles des non-existantes.\\
-		Ensuite on remplie la matrice aux endroits où les arètes existent, c'est-à-dire pour chaque couple de lignes $i$ et $i+1$ de la matrice, aux colonnes $i$ et $2^(M-1)$. Pour ce faire on effectue le calcul des équations de convolutions, obtenue à partir des polynômes générateurs et des états possibles des registres.\\
-		Ainsi on obtient la matrice du diagramme d'état du code.
+		On commence par tranformer les données octales des polynômes générateurs en binaire avec les fonctions $base2dec$ et $dec2bin$. On calcule M en prenant $M = \underset{i \in  \llbracket 1, \ldots, n \rrbracket}{max}\ deg(g_i)$ et on génère une matrice de taille $2^M$ initialisée à $-1$ pour différencier les arêtes utiles des non-existantes.\\
+		Ensuite on remplit la matrice aux endroits où les arètes existent, c'est-à-dire pour chaque couple de lignes $i$ et $i+1$ de la matrice, aux colonnes $i$ et $2^{M-1}$. Pour ce faire on effectue le calcul des équations de convolutions obtenues à partir des polynômes générateurs et des états possibles des registres.\\
+		Ainsi on obtient la matrice du diagramme d'états du code.
 		
 	\subsection{Principe de fonctionnement de la fonction $decodconv$}
 	
@@ -124,8 +123,23 @@
 		On se place sur un canal binaire symétrique de probabilité d'erreur $p$. Pour cela, la fonction $bsc$ va parcourir un vecteur correspondant au message codé (ou au message initial dans le cas d'une transmission sans codage) et retourner le message transmit bit à bit avec une erreur de probabilité $p$.\\
 		\\
 		Le message \textit{tout à zéro} est transmis avec un codeur de génératrice $g = [3]$ (en parallèle du message non codé) dans le canal binaire symétrique précédent 500 fois pour nous permettre de moyenner le taux d'erreur à la réception et d'obtenir ainsi des probabilités d'erreurs fiables. La courbe d'erreur ainsi obtenu nous permet d'observer qu'une partie des erreurs survenues lors de la transmission à travers le canal a été corrigé. Le code est d'ailleurs plus performant pour une probabilité d'erreur canal $p = 0.5$ comme le montre la courbe de distance entre les deux messages reçus.\\
-		\\
+		\begin{figure}[h]
+				\centering
+				\includegraphics[scale=0.5]{img/test_1.png}
+				%\caption{Signal $r_l(t)$ pour $t \in [0, 50T_s-T_e]$}
+				\label{test_1}
+		\end{figure}
+		\\\\\\
 		Le même test est effectué pour un codeur de génératrice $g = [5,7]$ et un codeur de $g = [15,17]$.\\
+		
+				\begin{figure}[h]
+					\centerline{%
+					\includegraphics[width=0.5\textwidth]{img/test_2.png}%
+					\includegraphics[width=0.5\textwidth] {img/test_3.png}%
+					}%
+					%\caption{}
+					\end{figure}
+		\\\\
 		On remarque ainsi que le premier est moins performant que le codeur $g = [3]$ dû à sa proximité avec la courbe d'erreur d'une transmission sans codage. Cependant le second nous permet d'obtenir un meilleur décodage dans les intervalles $[0; 0.2]$ et $[0.8; 1]$.
 		La connaissance de la probabilité d'erreur au décodage nous permettra donc de sélectionner le décodeur le plus performant (i.e. la génératrice à utiliser) comme dans l'exemple ci-dessus où le tout premier décodeur est plus performant pour $p \in [0.2; 0.8]$ et le troisième pour $p \in [0; 0.2] \bigcup\ [0.8; 1]$.
 	

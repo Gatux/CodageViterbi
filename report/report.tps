@@ -12,13 +12,13 @@ MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
 NormalPos.right=780
-NormalPos.bottom=359
+NormalPos.bottom=568
 Class=LaTeXView
 Document=report.tex
 
 [Frame0_View0,0]
-TopLine=93
-Cursor=3357
+TopLine=184
+Cursor=8486
 
 [SessionInfo]
 FrameCount=1
